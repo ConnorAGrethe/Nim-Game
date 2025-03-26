@@ -16,14 +16,14 @@ public class Player{
     public int getScore(){
         return score;
     }
-    public win(){
+    public void win(){
         score++;
     }
     public void doMove(int p, int g){
         int val;
         boolean loop = true;
         System.out.println("There are" + p + " pieces left. You can take up to " + g + " pieces.");
-        Scanner sc;
+        Scanner sc = new Scanner(System.in);
         val = sc.nextInt();
         System.out.println("How many pieces would you like to take?");
         while(loop){
@@ -31,11 +31,13 @@ public class Player{
                 game.move(val);
                 loop = false;
             }
+            else{
             System.out.println("Invalid move!");
             System.out.println("There are" + p + " pieces left. You can take up to " + g + " pieces.");
             val = sc.nextInt();
             System.out.println("How many pieces would you like to take?");
+            }
         }
-
+        game.move(val);
     }
 }
