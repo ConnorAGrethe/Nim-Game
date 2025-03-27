@@ -1,3 +1,6 @@
+import java.util.Scanner;
+
+
 public class Nim{
     int pieces;
     int greatest;
@@ -7,35 +10,46 @@ public class Nim{
     boolean pa;
 
     public Nim(Player p, Player f){
-        pieces = 10+Math.random()*41;
+        pieces = (int)(10+Math.random()*41);
         setGreatest();
-        up = 1+Math.random()*2;
+        up = (int)(1+Math.random()*2);
         p1 = p;
         p2 = f;
         if(up == 1){
             System.out.println(p1.getName() + " is first");
+            move(p1.doMove(pieces, greatest));
         }else{
             System.out.println(p2.getName() + " is first");
+            move(p2.doMove(pieces, greatest));
         }
     }
     public Nim(Player p, boolean hm){
-        pieces = 10+Math.random()*41;
+        pieces = (int)(10+Math.random()*41);
         setGreatest();
-        up = 1+Math.random()*2;
+        if(hm){
+            up = (int)((10+Math.random()*11)/20);
+        } else{
+            up = (int)(1+Math.random()*2);
+        }
         p1 = p;
         p2 = new Computer(hm);
-        
+        if(up == 1){
+            System.out.println(p1.getName() + " is first");
+            move(p1.doMove(pieces, greatest));
+        }else{
+            System.out.println(p2.getName() + " is first");
+            move(p2.doMove(pieces, greatest));
+        }
     }
     public void setGreatest(){
-        greatest = pices/2;
+        greatest = pieces/2;
         if(greatest == 0){
             greatest = 1;
         }
     }
     public void move(int n){
-        if(n >= greatest){
-            pieces -= n;
-        }
+        pieces-=n;
+        setGreatest();
         if(pieces == 0){
             if(up==1){
                 p2.win();
@@ -64,22 +78,30 @@ public class Nim{
             if(pa){
                 playAgain();
             }
-        }
-        else{
+        }else {
             if(up==1){
                 up=2;
                 System.out.println(p2.getName() + " is up");
+                move(p2.doMove(pieces, greatest));
             }else{
                 up=1;
                 System.out.println(p1.getName() + " is up");
+                move(p1.doMove(pieces, greatest));
             }
         }
 
     }
     public void playAgain(){
-        pieces = 10+Math.random()*41;
+        pieces = (int)(10+Math.random()*41);
         setGreatest();
-        up = 1+Math.random()*2;
+        up = (int)(1+Math.random()*2);
+        if(up == 1){
+            System.out.println(p1.getName() + " is first");
+            p1.doMove(pieces, greatest);
+        }else{
+            System.out.println(p2.getName() + " is first");
+            p2.doMove(pieces, greatest);
+        }
     }
     public int getPieces(){
         return pieces;
@@ -91,3 +113,4 @@ public class Nim{
         return up;
     }
 }
+//Wyatt Judge was here

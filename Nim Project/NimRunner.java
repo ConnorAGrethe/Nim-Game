@@ -1,3 +1,4 @@
+import java.util.Scanner;
 public class NimRunner
 {
     public static void main(String[] args){
@@ -7,10 +8,10 @@ public class NimRunner
         playerCount = scan.nextInt();
         if(playerCount == 1){
             System.out.println("What is your name?");
-            String name = scan.nextLine();
-            Player p1 = new Player(name);
+            Player p1 = writePlayer();
             //scaner ask for hard mode
             System.out.println("Would you like to play hard mode? Yes or No.");
+            scan.nextLine();
             String hardMode = scan.nextLine();
             boolean l = true;
             while(l = true){
@@ -32,14 +33,28 @@ public class NimRunner
 
             
         } else {
+            // String name;
+            // if(true){
+            //     System.out.println("Player 1 what is your name?");
+            //     name = scan.nextLine();
+            // }
+            // Player p1 = new Player(name);
+            // System.out.println("Player 2 what is your name?");
+            // String name2 = scan.nextLine();
+            // Player p2 = new Player(name2);
+            
             System.out.println("Player 1 what is your name?");
-            String name = scan.nextLine();
-            Player p1 = new Player(name);
-            System.out.println("Player 1 what is your name?");
-            String name2 = scan.nextLine();
-            Player p2 = new Player(name2);
+            Player p1 = writePlayer();
+            System.out.println("Player 2 what is your name?");
+            Player p2 = writePlayer();
             Nim game = new Nim(p1,p2);
         }
-        
+        scan.close();
+    }
+    public static Player writePlayer(){
+        Scanner sc = new Scanner(System.in);
+        String name = sc.nextLine();
+        return new Player(name);
+        //sc.close();
     }
 }

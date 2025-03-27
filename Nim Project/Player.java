@@ -19,25 +19,25 @@ public class Player{
     public void win(){
         score++;
     }
-    public void doMove(int p, int g){
+    public int doMove(int p, int g){
         int val;
         boolean loop = true;
-        System.out.println("There are" + p + " pieces left. You can take up to " + g + " pieces.");
+        System.out.println("There are " + p + " pieces left. You can take up to " + g + " pieces.");
+        System.out.println("How many pieces would you like to take?");
         Scanner sc = new Scanner(System.in);
         val = sc.nextInt();
-        System.out.println("How many pieces would you like to take?");
         while(loop){
             if(0<val && val<=g){
-                game.move(val);
                 loop = false;
             }
             else{
             System.out.println("Invalid move!");
-            System.out.println("There are" + p + " pieces left. You can take up to " + g + " pieces.");
-            val = sc.nextInt();
+            System.out.println("There are " + p + " pieces left. You can take up to " + g + " pieces.");
             System.out.println("How many pieces would you like to take?");
+            val = sc.nextInt();
             }
         }
-        game.move(val);
+        // game.move(val);
+        return val;
     }
 }
